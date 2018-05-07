@@ -5,8 +5,8 @@ import time
 class SonicSensor:
 
     def __init__(self):
-        self.triggerPin = 31
-        self.echoPin = 32
+        self.triggerPin = 31    #06
+        self.echoPin = 32       #12
         GPIO.setup(self.triggerPin, GPIO.OUT)
         GPIO.setup(self.echoPin, GPIO.IN)
 
