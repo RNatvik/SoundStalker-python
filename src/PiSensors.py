@@ -31,3 +31,4 @@ if __name__ == '__main__':
 
     while True:
         sonic.shitTestForRuben()
+        print(GPIO.input(sonic.echoPin))
