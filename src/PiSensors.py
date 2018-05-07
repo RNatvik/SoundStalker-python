@@ -31,7 +31,8 @@ class SonicSensor:
     def waitForEcho(self):
         finished = False
         duration = 0
-        while not finished:
+        timeout = time.time() + 3
+        while not finished and time.time() < timeout:
 
             if GPIO.input(self.echoPin) == 1:
                 startTime = time.time()
@@ -45,10 +46,27 @@ class SonicSensor:
         return duration
 
     def getDistance(self):
-        self.trigger()
-        duration = self.waitForEcho()
-        distance = duration * 1000000 * 0.034/2
-        return int(distance)
+
+        testResult = []
+
+        for test in range(5):
+            self.trigger()
+            duration = self.waitForEcho()
+            distance = duration * 1000000 * 0.034/2
+            testResult.append(int(distance))
+
+        for test in testResult:
+            if test > 400:
+                testResult.remove(test)
+
+        totalValue = 0
+        numberOfValues = 0
+        for test in testResult:
+            totalValue += test
+            numberOfValues += 1
+
+        averageValue = totalValue / numberOfValues
+        return averageValue
 
 
 if __name__ == '__main__':
@@ -58,7 +76,7 @@ if __name__ == '__main__':
         while True:
             distance = sonic.getDistance()
             print(distance)
-            time.sleep(0.5)
+            time.sleep()
     finally:
         print("shutting down")
         GPIO.cleanup()

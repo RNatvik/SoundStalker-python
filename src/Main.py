@@ -1,6 +1,6 @@
 from pyfirmata import Arduino, util
-from src.ArduinoCom import BatterySensor, TempSensor
-from src.PiSensors import SonicSensor
+from .ArduinoCom import BatterySensor, TempSensor
+from .PiSensors import SonicSensor
 import RPi.GPIO as GPIO
 import time
 
@@ -21,6 +21,3 @@ print(batterySensor.isFullyCharged())
 print(batterySensor.isDepleted())
 
 board.exit()
-
-while True:
-    sonic.shitTestForRuben()
