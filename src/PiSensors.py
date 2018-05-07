@@ -1,4 +1,5 @@
 import RPi.GPIO as GPIO
+import time
 
 
 class SonicSensor:
@@ -10,19 +11,23 @@ class SonicSensor:
         GPIO.setup(self.echoPin, GPIO.IN)
 
     def trigger(self):
-        pass
+        GPIO.output(self.triggerPin, 1)
+        time.sleep(0.000010)
+        GPIO.output(self.triggerPin, 0)
 
     def waitForEcho(self):
-        pass
+        GPIO.wait_for_edge(self.echoPin, GPIO.RISING)
+        startTime = time.time()
+        GPIO.wait_for_edge(self.echoPin, GPIO.FALLING)
+        endTime = time.time()
+        duration = endTime - startTime
+        return duration
 
     def getDistance(self):
         self.trigger()
-
-    def shitTestForRuben(self):
-        if GPIO.input(self.echoPin):
-            GPIO.output(self.triggerPin, 1)
-        else:
-            GPIO.output(self.triggerPin, 0)
+        duration = self.waitForEcho()
+        distance = duration * 0.034/2
+        return distance
 
 
 if __name__ == '__main__':
@@ -30,5 +35,5 @@ if __name__ == '__main__':
     sonic = SonicSensor()
 
     while True:
-        sonic.shitTestForRuben()
-        print(GPIO.input(sonic.echoPin))
+        distance = sonic.getDistance()
+        print(distance)
