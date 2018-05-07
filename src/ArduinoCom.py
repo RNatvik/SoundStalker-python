@@ -1,17 +1,26 @@
-from pyfirmata import Arduino
+from pyfirmata import Arduino, util
 
 
 class BatterySensor:
 
-    def __init__(self, USB_PORT):
+    def __init__(self, arduino, pin: str):
         self.MAX_VOLTAGE = 4.2
         self.MIN_VOLTAGE = 3.0
-        board = Arduino(USB_PORT)
-        self.pin = board.get_pin('a:0:i')
+        board = arduino
+        self.iterator = util.Iterator(board)
+        self.iterator.setDaemon(True)
+        self.iterator.start()
+        self.pin = board.get_pin(pin)
 
     def getVoltage(self):
         value = self.pin.read()
         return value * 5
+
+    def getChargeLevel(self):
+        currentVoltage = self.getVoltage()
+        scale = self.MAX_VOLTAGE - self.MIN_VOLTAGE
+        chargeLevel = ((currentVoltage - self.MIN_VOLTAGE) / scale) * 100
+        return chargeLevel
 
     def isFullyCharged(self):
         batteryFull = False
@@ -32,10 +41,13 @@ class BatterySensor:
 
 class TempSensor:
 
-    def __init__(self, USB_PORT):
+    def __init__(self, arduino, pin: str):
         self.MAX_TEMP = 40
-        board = Arduino(USB_PORT)
-        self.pin = board.get_pin('a:1:i')
+        board = arduino
+        self.iterator = util.Iterator(board)
+        self.iterator.setDaemon(True)
+        self.iterator.start()
+        self.pin = board.get_pin(pin)
 
     def getVoltage(self):
         value = self.pin.read()
@@ -43,7 +55,7 @@ class TempSensor:
 
     def getTemperature(self):
         voltage = self.getVoltage()
-        temp = (voltage - 500) / 10
+        temp = (voltage - 500) * 0.1
         return temp
 
     def isAboveThreshold(self):
