@@ -1,11 +1,13 @@
 from pyfirmata import Arduino, util
-from .ArduinoCom import BatterySensor, TempSensor
-from .PiSensors import SonicSensor
+from src.ArduinoCom import BatterySensor, TempSensor
+from src.PiSensors import SonicSensor
 import RPi.GPIO as GPIO
 import time
 
 
 if __name__ == '__main__':
+    if __package__ is None:
+        __package__ = "src"
     GPIO.setmode(GPIO.BOARD)
 
     board = Arduino('/dev/ttyUSB0')

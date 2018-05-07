@@ -21,7 +21,7 @@ class BatterySensor:
         currentVoltage = self.getVoltage()
         scale = self.MAX_VOLTAGE - self.MIN_VOLTAGE
         chargeLevel = ((currentVoltage - self.MIN_VOLTAGE) / scale) * 100
-        return chargeLevel
+        return int(chargeLevel)
 
     def isFullyCharged(self):
         batteryFull = False
@@ -89,16 +89,6 @@ if __name__ == '__main__':
                   "Temperature (C): " + str(tempSensor.getTemperature()) + "\n" +
                   "Above Threshold: " + str(tempSensor.isAboveThreshold()) + "\n")
 
-            # print("Battery sensor:")
-            # print("Voltage (V): " + batterySensor.getVoltage())
-            # print("Charge level (%): " + batterySensor.getChargeLevel())
-            # print("Fully charged: " + str(batterySensor.isFullyCharged()))
-            # print("Depleted: " + str(batterySensor.isDepleted()))
-            #
-            # print("Temperature Sensor:")
-            # print("Voltage (mV): " + tempSensor.getVoltage())
-            # print("Temperature (C): " + tempSensor.getTemperature())
-            # print("Above Threshold: " + str(tempSensor.isAboveThreshold()))
             time.sleep(0.5)
     finally:
         print("shutting down")
