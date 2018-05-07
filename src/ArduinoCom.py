@@ -42,7 +42,7 @@ class BatterySensor:
 
 class TempSensor:
 
-    def __init__(self, arduino, pin: str):
+    def __init__(self, arduino, pin):
         self.MAX_TEMP = 40
         board = arduino
         self.iterator = util.Iterator(board)
