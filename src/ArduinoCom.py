@@ -66,3 +66,30 @@ class TempSensor:
             aboveThreshold = True
 
         return aboveThreshold
+
+
+if __name__ == '__main__':
+    try:
+        board = Arduino('/dev/ttyUSB0')
+        batterySensor = BatterySensor(board, 'a:0:i')
+        tempSensor = TempSensor(board, 'a:1:i')
+        print("Sleeping")
+        time.sleep(2)
+        print("Awake")
+
+        while True:
+            print("Battery sensor:\n" +
+                  "Voltage (V): " + batterySensor.getVoltage() + "\n" +
+                  "Charge level (%): " + batterySensor.getChargeLevel() + "\n" +
+                  "Fully charged: " + str(batterySensor.isFullyCharged()) + "\n" +
+                  "Depleted: " + str(batterySensor.isDepleted()) + "\n")
+
+            print("Temperature Sensor:\n" +
+                  "Voltage (mV): " + tempSensor.getVoltage() + "\n" +
+                  "Temperature (C): " + tempSensor.getTemperature() + "\n" +
+                  "Above Threshold: " + str(tempSensor.isAboveThreshold()) + "\n")
+
+            time.sleep(0.5)
+    finally:
+        print("shutting down")
+        board.exit()

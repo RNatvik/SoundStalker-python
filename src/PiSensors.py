@@ -70,9 +70,9 @@ class SonicSensor:
 
 
 if __name__ == '__main__':
-    GPIO.setmode(GPIO.BOARD)
-    sonic = SonicSensor()
     try:
+        GPIO.setmode(GPIO.BOARD)
+        sonic = SonicSensor()
         while True:
             distance = sonic.getDistance()
             print(distance)
