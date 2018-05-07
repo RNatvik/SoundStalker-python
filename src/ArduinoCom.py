@@ -78,16 +78,16 @@ if __name__ == '__main__':
         print("Awake")
 
         while True:
-            print("Battery sensor:\n" +
-                  "Voltage (V): " + batterySensor.getVoltage() + "\n" +
-                  "Charge level (%): " + batterySensor.getChargeLevel() + "\n" +
-                  "Fully charged: " + batterySensor.isFullyCharged() + "\n" +
-                  "Depleted: " + batterySensor.isDepleted() + "\n")
+            print("Battery sensor:")
+            print("Voltage (V): " + batterySensor.getVoltage())
+            print("Charge level (%): " + batterySensor.getChargeLevel())
+            print("Fully charged: " + str(batterySensor.isFullyCharged()))
+            print("Depleted: " + str(batterySensor.isDepleted()))
 
-            print("Temperature Sensor:\n" +
-                  "Voltage (mV): " + tempSensor.getVoltage() + "\n" +
-                  "Temperature (C): " + tempSensor.getTemperature() + "\n" +
-                  "Above Threshold: " + tempSensor.isAboveThreshold() + "\n")
+            print("Temperature Sensor:")
+            print("Voltage (mV): " + tempSensor.getVoltage())
+            print("Temperature (C): " + tempSensor.getTemperature())
+            print("Above Threshold: " + str(tempSensor.isAboveThreshold()))
 
             time.sleep(0.5)
     finally:
