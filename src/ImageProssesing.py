@@ -18,6 +18,8 @@ for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=
     # and occupied/unoccupied text
     image = frame.array
     print(image)
+    print(image.shape)
+    print(image.ndim)
     print("\n\n\n\n\n\n\n\n\n\n")
 
     # clear the stream in preparation for the next frame
