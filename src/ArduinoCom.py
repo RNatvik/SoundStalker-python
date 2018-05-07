@@ -81,13 +81,13 @@ if __name__ == '__main__':
             print("Battery sensor:\n" +
                   "Voltage (V): " + batterySensor.getVoltage() + "\n" +
                   "Charge level (%): " + batterySensor.getChargeLevel() + "\n" +
-                  "Fully charged: " + str(batterySensor.isFullyCharged()) + "\n" +
-                  "Depleted: " + str(batterySensor.isDepleted()) + "\n")
+                  "Fully charged: " + batterySensor.isFullyCharged() + "\n" +
+                  "Depleted: " + batterySensor.isDepleted() + "\n")
 
             print("Temperature Sensor:\n" +
                   "Voltage (mV): " + tempSensor.getVoltage() + "\n" +
                   "Temperature (C): " + tempSensor.getTemperature() + "\n" +
-                  "Above Threshold: " + str(tempSensor.isAboveThreshold()) + "\n")
+                  "Above Threshold: " + tempSensor.isAboveThreshold() + "\n")
 
             time.sleep(0.5)
     finally:
