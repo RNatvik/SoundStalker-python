@@ -42,7 +42,7 @@ class BatterySensor:
 
 class TempSensor:
 
-    def __init__(self, arduino, pin):
+    def __init__(self, arduino, pin: str):
         self.MAX_TEMP = 40
         board = arduino
         self.iterator = util.Iterator(board)
@@ -78,17 +78,27 @@ if __name__ == '__main__':
         print("Awake")
 
         while True:
-            print("Battery sensor:")
-            print("Voltage (V): " + batterySensor.getVoltage())
-            print("Charge level (%): " + batterySensor.getChargeLevel())
-            print("Fully charged: " + str(batterySensor.isFullyCharged()))
-            print("Depleted: " + str(batterySensor.isDepleted()))
+            print("Battery sensor:\n" +
+                  "Voltage (V): " + str(batterySensor.getVoltage()) + "\n" +
+                  "Charge level (%): " + str(batterySensor.getChargeLevel()) + "\n" +
+                  "Fully charged: " + str(batterySensor.isFullyCharged()) + "\n" +
+                  "Depleted: " + str(batterySensor.isDepleted()) + "\n")
 
-            print("Temperature Sensor:")
-            print("Voltage (mV): " + tempSensor.getVoltage())
-            print("Temperature (C): " + tempSensor.getTemperature())
-            print("Above Threshold: " + str(tempSensor.isAboveThreshold()))
+            print("Temperature Sensor:\n" +
+                  "Voltage (mV): " + str(tempSensor.getVoltage()) + "\n" +
+                  "Temperature (C): " + str(tempSensor.getTemperature()) + "\n" +
+                  "Above Threshold: " + str(tempSensor.isAboveThreshold()) + "\n")
 
+            # print("Battery sensor:")
+            # print("Voltage (V): " + batterySensor.getVoltage())
+            # print("Charge level (%): " + batterySensor.getChargeLevel())
+            # print("Fully charged: " + str(batterySensor.isFullyCharged()))
+            # print("Depleted: " + str(batterySensor.isDepleted()))
+            #
+            # print("Temperature Sensor:")
+            # print("Voltage (mV): " + tempSensor.getVoltage())
+            # print("Temperature (C): " + tempSensor.getTemperature())
+            # print("Above Threshold: " + str(tempSensor.isAboveThreshold()))
             time.sleep(0.5)
     finally:
         print("shutting down")
