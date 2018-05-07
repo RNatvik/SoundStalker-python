@@ -17,6 +17,8 @@ for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=
     # grab the raw NumPy array representing the image, then initialize the timestamp
     # and occupied/unoccupied text
     image = frame.array
+    print(image)
+    print("\n\n\n\n\n\n\n\n\n\n")
 
     # clear the stream in preparation for the next frame
     rawCapture.truncate(0)
