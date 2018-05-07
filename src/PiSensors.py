@@ -48,7 +48,7 @@ class SonicSensor:
         self.trigger()
         duration = self.waitForEcho()
         distance = duration * 1000000 * 0.034/2
-        return distance
+        return int(distance)
 
 
 if __name__ == '__main__':
