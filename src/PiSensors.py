@@ -17,17 +17,34 @@ class SonicSensor:
         GPIO.output(self.triggerPin, 0)
         print("trigger end")
 
+    # def waitForEcho(self):
+    #     print("wait for edge start")
+    #     GPIO.wait_for_edge(self.echoPin, GPIO.RISING, timeout=5000)
+    #     print("found rising edge")
+    #     startTime = time.time()
+    #     print("waiting for falling edge")
+    #     GPIO.wait_for_edge(self.echoPin, GPIO.FALLING, timeout=5000)
+    #     print("found falling edge")
+    #     endTime = time.time()
+    #     duration = endTime - startTime
+    #     print("duration: " + duration)
+    #     return duration
+
     def waitForEcho(self):
-        print("wait for edge start")
-        GPIO.wait_for_edge(self.echoPin, GPIO.RISING, timeout=5000)
-        print("found rising edge")
-        startTime = time.time()
-        print("waiting for falling edge")
-        GPIO.wait_for_edge(self.echoPin, GPIO.FALLING, timeout=5000)
-        print("found falling edge")
-        endTime = time.time()
-        duration = endTime - startTime
-        print("duration: " + duration)
+        finished = False
+        duration = 0
+
+        while not finished:
+
+            if GPIO.input(self.echoPin) == 1:
+                startTime = time.time()
+
+                while GPIO.input(self.echoPin) == 1:
+                    finished = True
+                else:
+                    endTime = time.time()
+                    duration = endTime - startTime
+
         return duration
 
     def getDistance(self):
