@@ -11,11 +11,9 @@ class SonicSensor:
         GPIO.setup(self.echoPin, GPIO.IN)
 
     def trigger(self):
-        print("Trigger start")
         GPIO.output(self.triggerPin, 1)
         time.sleep(0.000010)
         GPIO.output(self.triggerPin, 0)
-        print("trigger end")
 
     # def waitForEcho(self):
     #     print("wait for edge start")
@@ -33,7 +31,6 @@ class SonicSensor:
     def waitForEcho(self):
         finished = False
         duration = 0
-
         while not finished:
 
             if GPIO.input(self.echoPin) == 1:
@@ -41,16 +38,16 @@ class SonicSensor:
 
                 while GPIO.input(self.echoPin) == 1:
                     finished = True
-                else:
-                    endTime = time.time()
-                    duration = endTime - startTime
+
+                endTime = time.time()
+                duration = endTime - startTime
 
         return duration
 
     def getDistance(self):
         self.trigger()
         duration = self.waitForEcho()
-        distance = duration * 0.034/2
+        distance = duration * 1000000 * 0.034/2
         return distance
 
 

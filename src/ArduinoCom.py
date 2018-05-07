@@ -1,4 +1,5 @@
 from pyfirmata import Arduino, util
+import time
 
 
 class BatterySensor:
