@@ -23,3 +23,11 @@ class SonicSensor:
             GPIO.output(self.triggerPin, 1)
         else:
             GPIO.output(self.triggerPin, 0)
+
+
+if __name__ == '__main__':
+    GPIO.setmode(GPIO.BOARD)
+    sonic = SonicSensor()
+
+    while True:
+        sonic.shitTestForRuben()
