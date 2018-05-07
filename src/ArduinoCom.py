@@ -4,7 +4,7 @@ import time
 
 class BatterySensor:
 
-    def __init__(self, arduino, pin: str):
+    def __init__(self, arduino, pin):
         self.MAX_VOLTAGE = 4.2
         self.MIN_VOLTAGE = 3.0
         board = arduino
@@ -42,7 +42,7 @@ class BatterySensor:
 
 class TempSensor:
 
-    def __init__(self, arduino, pin: str):
+    def __init__(self, arduino, pin):
         self.MAX_TEMP = 40
         board = arduino
         self.iterator = util.Iterator(board)
