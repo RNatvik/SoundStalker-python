@@ -38,9 +38,9 @@ class SonicSensor:
 
                 while GPIO.input(self.echoPin) == 1:
                     finished = True
-
-                endTime = time.time()
-                duration = endTime - startTime
+                else:
+                    endTime = time.time()
+                    duration = endTime - startTime
 
         return duration
 
@@ -58,6 +58,7 @@ if __name__ == '__main__':
         while True:
             distance = sonic.getDistance()
             print(distance)
+            time.sleep(0.5)
     finally:
         print("shutting down")
         GPIO.cleanup()
