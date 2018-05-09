@@ -85,6 +85,8 @@ class MainController:
             self.fullStop()
 
     def setMotors(self, joyX, joyY):
+        joyX *= 100
+        joyY *= 100
         self.motorController.setMotorSpeed(joyX, joyY)
 
     def fullStop(self):
