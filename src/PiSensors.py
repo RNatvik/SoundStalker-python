@@ -43,7 +43,7 @@ class SonicSensor:
             testResult.append(int(distance))
 
         for test in testResult:
-            if test > 300 or test == 0:
+            if test > 50 or test == 0:
                 testResult.remove(test)
 
         totalValue = 0
