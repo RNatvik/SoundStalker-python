@@ -12,8 +12,10 @@ class MotorController:
         self.rightMotorPin = 36
         GPIO.setup(self.leftMotorPin, GPIO.OUT)
         GPIO.setup(self.rightMotorPin, GPIO.OUT)
-        self.leftMotor = GPIO.PWM(self.leftMotorPin, 50)
-        self.rightMotor = GPIO.PWM(self.rightMotorPin, 50)
+        self.leftMotor = GPIO.PWM(self.leftMotorPin, 100)
+        self.rightMotor = GPIO.PWM(self.rightMotorPin, 100)
+        self.leftMotor.start()
+        self.rightMotor.start()
         self.leftMotor.ChangeDutyCycle(0)
         self.rightMotor.ChangeDutyCycle(0)
 
@@ -96,7 +98,6 @@ class MainController:
     def fullStop(self):
         self.relayController.closeAll()
         self.motorController.stopMotors()
-        GPIO.cleanup()
         self.shutdown = True
 
     def stopCharging(self):
