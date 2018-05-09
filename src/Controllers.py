@@ -108,6 +108,9 @@ if __name__ == '__main__':
     board = Arduino('/dev/ttyUSB0')
     leftMotorInput = board.get_pin('a:4:i')
     rightMotorInput = board.get_pin('a:5:i')
+    print("Sleeping")
+    time.sleep(2)
+    print("Awake")
     try:
         mainController = MainController(board)
         while not mainController.shutdown:
