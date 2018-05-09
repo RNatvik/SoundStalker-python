@@ -1,6 +1,6 @@
-from src.ArduinoCom import *
-from src.PiSensors import *
-from src.Relay import *
+from ArduinoCom import *
+from PiSensors import *
+from Relay import *
 import RPi.GPIO as GPIO
 import time
 
