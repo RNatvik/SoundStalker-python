@@ -68,11 +68,31 @@ class TempSensor:
         return aboveThreshold
 
 
+class Joystick:
+
+    def __init__(self, arduino, xPin, yPin):
+        board = arduino
+        self.iterator = util.Iterator(board)
+        self.iterator.setDaemon(True)
+        self.iterator.start()
+        self.xPin = board.get_pin(xPin)
+        self.yPin = board.get_pin(yPin)
+
+    def getX(self):
+        analogX = self.xPin.read()
+        return analogX
+
+    def getY(self):
+        analogY = self.yPin.read()
+        return analogY
+
+
 if __name__ == '__main__':
     try:
         board = Arduino('/dev/ttyUSB0')
         batterySensor = BatterySensor(board, 'a:0:i')
         tempSensor = TempSensor(board, 'a:1:i')
+        joystick = Joystick(board, 'a:2:i', 'a:3:i')
         print("Sleeping")
         time.sleep(2)
         print("Awake")
@@ -88,6 +108,10 @@ if __name__ == '__main__':
                   "Voltage (mV): " + str(tempSensor.getVoltage()) + "\n" +
                   "Temperature (C): " + str(tempSensor.getTemperature()) + "\n" +
                   "Above Threshold: " + str(tempSensor.isAboveThreshold()) + "\n")
+
+            print("Joystick: \n" +
+                  "X value: " + joystick.getX() + "\n" +
+                  "Y value: " + joystick.getY() + "\n")
 
             time.sleep(0.5)
     finally:
