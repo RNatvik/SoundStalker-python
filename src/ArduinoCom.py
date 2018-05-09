@@ -110,8 +110,8 @@ if __name__ == '__main__':
                   "Above Threshold: " + str(tempSensor.isAboveThreshold()) + "\n")
 
             print("Joystick: \n" +
-                  "X value: " + joystick.getX() + "\n" +
-                  "Y value: " + joystick.getY() + "\n")
+                  "X value: " + str(joystick.getX()) + "\n" +
+                  "Y value: " + str(joystick.getY()) + "\n")
 
             time.sleep(0.5)
     finally:
