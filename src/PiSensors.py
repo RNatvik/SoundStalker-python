@@ -43,16 +43,7 @@ class SonicSensor:
             testResult.append(int(distance))
         print("Before removal:")
         print(testResult)
-        # for test in testResult:
-        #     if test > 50 or test == 0:
-        #         testResult.remove(test)
-        # toBeRemoved = []
-        # for test in testResult:
-        #     if test > maxDistance or test == 0:
-        #         toBeRemoved.append(test)
-        # for item in toBeRemoved:
-        #     testResult.remove(item)
-        resFinal = [i for i in testResult if not i > 50 or i == 0]
+        resFinal = [i for i in testResult if not (i > maxDistance or i == 0)]
         print("After removal:")
         print(resFinal)
         totalValue = 0
