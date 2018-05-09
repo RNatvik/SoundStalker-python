@@ -94,7 +94,7 @@ class MainController:
         self.motorController.setMotorSpeed(joyX, joyY)
 
     def fullStop(self):
-        self.relayController.closeAll()
+        self.relayController.openAll()
         self.motorController.stopMotors()
         self.shutdown = True
 

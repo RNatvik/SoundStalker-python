@@ -8,7 +8,7 @@ class Relay:
         GPIO.setup(self.relayPin, GPIO.OUT)
 
     def close(self):
-        GPIO.output(self.relayPin, 0)
+        GPIO.output(self.relayPin, 1)
 
     def open(self):
-        GPIO.output(self.relayPin, 1)
+        GPIO.output(self.relayPin, 0)
