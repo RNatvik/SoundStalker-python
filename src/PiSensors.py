@@ -44,7 +44,7 @@ class SonicSensor:
 
         for test in testResult:
             if test > 50 or test == 0:
-                testResult.remove(test)
+                testResult = testResult.remove(test)
 
         totalValue = 0
         numberOfValues = 0
