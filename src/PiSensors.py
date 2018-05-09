@@ -76,7 +76,7 @@ if __name__ == '__main__':
         while True:
             distance = sonic.getDistance()
             print(distance)
-            time.sleep(0.1)
+            time.sleep(0.2)
     finally:
         print("shutting down")
         GPIO.cleanup()
