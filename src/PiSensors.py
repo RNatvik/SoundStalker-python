@@ -33,7 +33,7 @@ class SonicSensor:
         return duration
 
     def getDistance(self):
-
+        maxDistance = 100
         testResult = []
 
         for test in range(5):
@@ -46,23 +46,25 @@ class SonicSensor:
         # for test in testResult:
         #     if test > 50 or test == 0:
         #         testResult.remove(test)
-        toBeRemoved = []
-        for test in testResult:
-            if test > 50 or test == 0:
-                toBeRemoved.append(test)
-        for item in toBeRemoved:
-            testResult.remove(item)
+        # toBeRemoved = []
+        # for test in testResult:
+        #     if test > maxDistance or test == 0:
+        #         toBeRemoved.append(test)
+        # for item in toBeRemoved:
+        #     testResult.remove(item)
+        resFinal = [i for i in testResult if not i > 50 or i == 0]
         print("After removal:")
-        print(testResult)
+        print(resFinal)
         totalValue = 0
         numberOfValues = 0
-        for test in testResult:
+        for test in resFinal:
             totalValue += test
             numberOfValues += 1
         print("total value: " + str(totalValue))
         print("number of values: " + str(numberOfValues))
         if numberOfValues == 0:
             numberOfValues = 1
+            totalValue = maxDistance
         averageValue = totalValue / numberOfValues
         print("average value: " + str(averageValue))
         return averageValue
