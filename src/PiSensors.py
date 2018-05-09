@@ -41,18 +41,22 @@ class SonicSensor:
             duration = self.waitForEcho()
             distance = duration * 1000000 * 0.034/2
             testResult.append(int(distance))
-
+        print("Before removal:")
+        print(testResult)
         for test in testResult:
             if test > 50 or test == 0:
-                testResult = testResult.remove(test)
-
+                testResult.remove(test)
+        print("After removal:")
+        print(testResult)
         totalValue = 0
         numberOfValues = 0
         for test in testResult:
             totalValue += test
             numberOfValues += 1
-
+        print("total value: " + str(totalValue))
+        print("number of values: " + str(numberOfValues))
         averageValue = totalValue / numberOfValues
+        print("average value: " + str(averageValue))
         return averageValue
 
     def checkForObstacle(self):
