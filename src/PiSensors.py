@@ -15,10 +15,10 @@ class SonicSensor:
         time.sleep(0.000010)
         GPIO.output(self.triggerPin, 0)
 
-    def waitForEcho(self):
+    def waitForEcho(self, waitDuration=0.5):
         finished = False
         duration = 0
-        timeout = time.time() + 0.5
+        timeout = time.time() + waitDuration
         while not finished and time.time() < timeout:
 
             if GPIO.input(self.echoPin) == 1:
@@ -32,39 +32,36 @@ class SonicSensor:
 
         return duration
 
-    def getDistance(self):
-        maxDistance = 100
+    def getDistance(self, maxDistance=100, testRange=5):
+
         testResult = []
 
-        for test in range(5):
+        for test in range(testRange):
             self.trigger()
             duration = self.waitForEcho()
             distance = duration * 1000000 * 0.034/2
             testResult.append(int(distance))
-        print("Before removal:")
-        print(testResult)
+
         resFinal = [i for i in testResult if not (i > maxDistance or i == 0)]
-        print("After removal:")
-        print(resFinal)
+
         totalValue = 0
         numberOfValues = 0
         for test in resFinal:
             totalValue += test
             numberOfValues += 1
-        print("total value: " + str(totalValue))
-        print("number of values: " + str(numberOfValues))
+
         if numberOfValues == 0:
             numberOfValues = 1
             totalValue = maxDistance
+
         averageValue = totalValue / numberOfValues
-        print("average value: " + str(averageValue))
         return averageValue
 
-    def checkForObstacle(self):
+    def checkForObstacle(self, threshold=30):
         obstacle = False
         distance = self.getDistance()
 
-        if distance < 20:
+        if distance < threshold:
             obstacle = True
 
         return obstacle
