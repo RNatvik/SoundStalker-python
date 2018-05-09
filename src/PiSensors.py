@@ -57,7 +57,7 @@ class SonicSensor:
 
     def checkForObstacle(self):
         obstacle = False
-        distance = self.sonicSensor.getDistance()
+        distance = self.getDistance()
 
         if distance < 20:
             obstacle = True
