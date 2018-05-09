@@ -14,10 +14,8 @@ class MotorController:
         GPIO.setup(self.rightMotorPin, GPIO.OUT)
         self.leftMotor = GPIO.PWM(self.leftMotorPin, 100)
         self.rightMotor = GPIO.PWM(self.rightMotorPin, 100)
-        self.leftMotor.start()
-        self.rightMotor.start()
-        self.leftMotor.ChangeDutyCycle(0)
-        self.rightMotor.ChangeDutyCycle(0)
+        self.leftMotor.start(0)
+        self.rightMotor.start(0)
 
     def setMotorSpeed(self, pwmDutyLeft, pwmDutyRight):
         self.leftMotor.ChangeDutyCycle(pwmDutyLeft)
