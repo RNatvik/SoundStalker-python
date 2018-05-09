@@ -106,13 +106,14 @@ if __name__ == '__main__':
 
     GPIO.setmode(GPIO.BOARD)
     board = Arduino('/dev/ttyUSB0')
-    leftMotorInput = board.get_pin('a:4:i')
-    rightMotorInput = board.get_pin('a:5:i')
-    print("Sleeping")
-    time.sleep(2)
-    print("Awake")
+
     try:
         mainController = MainController(board)
+        leftMotorInput = board.get_pin('a:4:i')
+        rightMotorInput = board.get_pin('a:5:i')
+        print("Sleeping")
+        time.sleep(3)
+        print("Awake")
         while not mainController.shutdown:
             mainController.checkSensors()
             print("Left motor output voltage: " + str(leftMotorInput.read() * 5) + "\n" +
