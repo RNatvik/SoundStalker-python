@@ -5,8 +5,8 @@ import time
 class SonicSensor:
 
     def __init__(self):
-        self.triggerPin = 31    #06
-        self.echoPin = 32       #12
+        self.triggerPin = 31    # 06
+        self.echoPin = 32       # 12
         GPIO.setup(self.triggerPin, GPIO.OUT)
         GPIO.setup(self.echoPin, GPIO.IN)
 
@@ -15,23 +15,10 @@ class SonicSensor:
         time.sleep(0.000010)
         GPIO.output(self.triggerPin, 0)
 
-    # def waitForEcho(self):
-    #     print("wait for edge start")
-    #     GPIO.wait_for_edge(self.echoPin, GPIO.RISING, timeout=5000)
-    #     print("found rising edge")
-    #     startTime = time.time()
-    #     print("waiting for falling edge")
-    #     GPIO.wait_for_edge(self.echoPin, GPIO.FALLING, timeout=5000)
-    #     print("found falling edge")
-    #     endTime = time.time()
-    #     duration = endTime - startTime
-    #     print("duration: " + duration)
-    #     return duration
-
     def waitForEcho(self):
         finished = False
         duration = 0
-        timeout = time.time() + 3
+        timeout = time.time() + 0.5
         while not finished and time.time() < timeout:
 
             if GPIO.input(self.echoPin) == 1:
@@ -56,7 +43,7 @@ class SonicSensor:
             testResult.append(int(distance))
 
         for test in testResult:
-            if test > 400:
+            if test > 300:
                 testResult.remove(test)
 
         totalValue = 0
@@ -67,6 +54,15 @@ class SonicSensor:
 
         averageValue = totalValue / numberOfValues
         return averageValue
+
+    def checkForObstacle(self):
+        obstacle = False
+        distance = self.sonicSensor.getDistance()
+
+        if distance < 20:
+            obstacle = True
+
+        return obstacle
 
 
 if __name__ == '__main__':
