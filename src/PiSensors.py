@@ -43,9 +43,15 @@ class SonicSensor:
             testResult.append(int(distance))
         print("Before removal:")
         print(testResult)
+        # for test in testResult:
+        #     if test > 50 or test == 0:
+        #         testResult.remove(test)
+        toBeRemoved = []
         for test in testResult:
             if test > 50 or test == 0:
-                testResult.remove(test)
+                toBeRemoved.append(test)
+        for item in toBeRemoved:
+            testResult.remove(item)
         print("After removal:")
         print(testResult)
         totalValue = 0
@@ -55,6 +61,8 @@ class SonicSensor:
             numberOfValues += 1
         print("total value: " + str(totalValue))
         print("number of values: " + str(numberOfValues))
+        if numberOfValues == 0:
+            numberOfValues = 1
         averageValue = totalValue / numberOfValues
         print("average value: " + str(averageValue))
         return averageValue
