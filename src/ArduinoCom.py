@@ -81,13 +81,15 @@ class Joystick:
     def getX(self):
         analogX = self.xPin.read()
         analogX -= 0.5
-        analogX *= 2
+        analogX = int(analogX*20)
+        analogX /= 10
         return analogX
 
     def getY(self):
         analogY = self.yPin.read()
         analogY -= 0.5
-        analogY *= 2
+        analogY = int(analogY*20)
+        analogY /= 10
         return analogY
 
 
@@ -116,6 +118,7 @@ if __name__ == '__main__':
             print("Joystick: \n" +
                   "X value: " + str(joystick.getX()) + "\n" +
                   "Y value: " + str(joystick.getY()) + "\n")
+            time.sleep(0.2)
 
     finally:
         print("shutting down")
