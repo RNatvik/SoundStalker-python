@@ -90,10 +90,10 @@ class Joystick:
     def getY(self):
         analogY = self.yPin.read()
         analogY -= 0.5
-        analogY *= 200
+        analogY *= 20
         analogY = int(analogY)
         analogY = float(analogY)
-        analogY /= 100
+        analogY /= 10
         return analogY
 
 
