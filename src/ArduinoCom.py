@@ -117,7 +117,6 @@ if __name__ == '__main__':
                   "X value: " + str(joystick.getX()) + "\n" +
                   "Y value: " + str(joystick.getY()) + "\n")
 
-            time.sleep(0.5)
     finally:
         print("shutting down")
         board.exit()
