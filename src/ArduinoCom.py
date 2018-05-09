@@ -81,8 +81,10 @@ class Joystick:
     def getX(self):
         analogX = self.xPin.read()
         analogX -= 0.5
-        analogX *= 200
+        analogX *= 20
         analogX = int(analogX)
+        analogX = float(analogX)
+        analogX /= 10
         return analogX
 
     def getY(self):
@@ -90,6 +92,8 @@ class Joystick:
         analogY -= 0.5
         analogY *= 200
         analogY = int(analogY)
+        analogY = float(analogY)
+        analogY /= 100
         return analogY
 
 
