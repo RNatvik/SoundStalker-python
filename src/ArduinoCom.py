@@ -83,7 +83,6 @@ class Joystick:
         analogX -= 0.5
         analogX *= 200
         analogX = int(analogX)
-        analogX = float(analogX/100)
         return analogX
 
     def getY(self):
@@ -91,7 +90,6 @@ class Joystick:
         analogY -= 0.5
         analogY *= 200
         analogY = int(analogY)
-        analogY = float(analogY/100)
         return analogY
 
 
