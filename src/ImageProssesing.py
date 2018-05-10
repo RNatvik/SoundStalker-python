@@ -1,4 +1,5 @@
 # import the necessary packages
+import numpy as numpy
 from picamera.array import PiRGBArray
 from picamera import PiCamera
 import time
@@ -17,6 +18,9 @@ for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=
     # grab the raw NumPy array representing the image, then initialize the timestamp
     # and occupied/unoccupied text
     image = frame.array
+
+    redPixsels =numpy.add                                              
+
     print(image)
     print(image.shape)
     print(image.ndim)
