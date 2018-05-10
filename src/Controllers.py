@@ -21,26 +21,26 @@ class MotorController:
         self.leftMotor.setSpeed(leftSpeed)
         self.rightMotor.setSpeed(rightSpeed)
 
-    # if value == 1, return 100
+    # if value == 1, return 1
     # if value == -1, return 0
-    # if value == 0, return 50
+    # if value == 0, return 0.5
     def calculateLeftSpeed(self, value):
         value += 1
-        value *= 100
         value /= 2
         return value
 
     # if value == 1, return 0
-    # if value == -1, return 100
-    # if value == 0, return 50
+    # if value == -1, return 1
+    # if value == 0, return 0.5
     def calculateRightSpeed(self, value):
         value -= 1
-        value *= -100
+        value *= -1
         value /= 2
         return value
 
     def stopMotors(self):
-        pass
+        self.leftMotor.setSpeed(0)
+        self.rightMotor.setSpeed(0)
 
 
 class RelayController:
