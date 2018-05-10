@@ -1,1 +1,28 @@
 
+
+
+Motor cointroller:
+    Sving: tar i mellom -1 & 1
+
+SensorsController:
+
+    joystick_X:
+        returner en veri mellom -1 & 1
+
+
+
+ImagerProsseser:
+    :x-akse:
+        reurner en verdi mellom -320 & 320
+
+
+
+PID Controller:
+    Image:
+        x-akse: tar in en verdi mellom -320 & 320
+        returnerer en verdi mellom -1 & 1
+
+
+
+finn ut:
+    arduino PWM
