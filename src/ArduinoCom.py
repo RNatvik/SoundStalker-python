@@ -95,6 +95,19 @@ class Joystick:
         return analogY
 
 
+class Motor:
+
+    def __init__(self, arduino, pin):
+        board = arduino
+        self.iterator = util.Iterator(board)
+        self.iterator.setDaemon(True)
+        self.iterator.start()
+        self.motor = board.get_pin(pin)
+
+    def setSpeed(self, value):
+        self.motor.write(value)
+
+
 if __name__ == '__main__':
     try:
         board = Arduino('/dev/ttyUSB0')

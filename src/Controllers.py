@@ -7,23 +7,40 @@ import time
 
 class MotorController:
 
-    def __init__(self):
-        self.leftMotorPin = 35
-        self.rightMotorPin = 36
-        GPIO.setup(self.leftMotorPin, GPIO.OUT)
-        GPIO.setup(self.rightMotorPin, GPIO.OUT)
-        self.leftMotor = GPIO.PWM(self.leftMotorPin, 100)
-        self.rightMotor = GPIO.PWM(self.rightMotorPin, 100)
-        self.leftMotor.start(0)
-        self.rightMotor.start(0)
+    def __init__(self, arduino, leftMotorPin, rightMotorPin):
+        board = arduino
+        self.iterator = util.Iterator(board)
+        self.iterator.setDaemon(True)
+        self.iterator.start()
+        self.leftMotor = Motor(board, leftMotorPin)
+        self.rightMotor = Motor(board, rightMotorPin)
 
-    def setMotorSpeed(self, pwmDutyLeft, pwmDutyRight):
-        self.leftMotor.ChangeDutyCycle(pwmDutyLeft)
-        self.rightMotor.ChangeDutyCycle(pwmDutyRight)
+    def setMotorSpeed(self, value):
+        leftSpeed = self.calculateLeftSpeed(value)
+        rightSpeed = self.calculateRightSpeed(value)
+        self.leftMotor.setSpeed(leftSpeed)
+        self.rightMotor.setSpeed(rightSpeed)
+
+    # if value == 1, return 100
+    # if value == -1, return 0
+    # if value == 0, return 50
+    def calculateLeftSpeed(self, value):
+        value += 1
+        value *= 100
+        value /= 2
+        return value
+
+    # if value == 1, return 0
+    # if value == -1, return 100
+    # if value == 0, return 50
+    def calculateRightSpeed(self, value):
+        value -= 1
+        value *= -100
+        value /= 2
+        return value
 
     def stopMotors(self):
-        self.leftMotor.ChangeDutyCycle(0)
-        self.rightMotor.ChangeDutyCycle(0)
+        pass
 
 
 class RelayController:
@@ -55,7 +72,7 @@ class MainController:
     def __init__(self, arduino):
         self.shutdown = False
         board = arduino
-        self.motorController = MotorController()
+        self.motorController = MotorController(board, 'd:10:p', 'd:11:p')
         self.relayController = RelayController()
         self.sonicSensor = SonicSensor()
         self.batterySensor = BatterySensor(board, 'a:0:i')
@@ -72,8 +89,7 @@ class MainController:
             obstacleFound = self.sonicSensor.checkForObstacle()
             if not obstacleFound:
                 joyX = self.joystick.getX()
-                joyY = self.joystick.getY()
-                self.setMotors(joyX, joyY)
+                self.motorController.setMotorSpeed(joyX)
             else:
                 self.motorController.stopMotors()
 
@@ -83,15 +99,6 @@ class MainController:
 
         else:
             self.fullStop()
-
-    def setMotors(self, joyX, joyY):
-        joyX *= 100
-        joyY *= 100
-        if joyX < 0:
-            joyX = 0
-        if joyY < 0:
-            joyY = 0
-        self.motorController.setMotorSpeed(joyX, joyY)
 
     def fullStop(self):
         self.relayController.openAll()
