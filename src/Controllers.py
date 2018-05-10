@@ -25,21 +25,17 @@ class MotorController:
     # if value == -1, return 0
     # if value == 0, return 0.5
     def calculateLeftSpeed(self, value):
-        print("Left before: " + str(value))
         value += 1
         value /= 2
-        print("Left after: " + str(value))
         return value
 
     # if value == 1, return 0
     # if value == -1, return 1
     # if value == 0, return 0.5
     def calculateRightSpeed(self, value):
-        print("Right before: " + str(value))
         value -= 1
         value *= -1
         value /= 2
-        print("Right after: " + str(value))
         return value
 
     def stopMotors(self):

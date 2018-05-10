@@ -105,6 +105,7 @@ class Motor:
         self.motor = board.get_pin(pin)
 
     def setSpeed(self, value):
+        print("value: " + str(value))
         self.motor.write(value)
 
 
