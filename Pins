@@ -1,0 +1,24 @@
+
+Battery sensor:
+    Arduino, 'a:0:i'
+
+Temp sensor:
+    Arduino, 'a:1:i'
+
+Joystick:
+    X:
+        Arduino, 'a:2:i'
+    Y:
+        Arduino, 'a:3:i'
+
+Motor:
+    Left:
+        Arduino, 'd:10:p'
+    Right:
+        Arduino, 'd:11:p'
+
+Sonic sensor:
+    Trigger:
+        GPIO, 31 #(06)
+    Echo:
+        GPIO, 32 #(12)
